@@ -102,14 +102,6 @@ export default async function DashboardPage() {
       {/* Sidebar Navigation */}
       <aside className={styles.sidebar}>
         <div>
-          <div className={styles.brand}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#635bff" strokeWidth="3">
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-            </svg>
-            Finance Tracker
-          </div>
-
           <div className={styles.sectionLabel}>Main Menu</div>
           <ul className={styles.menu}>
             <li>
