@@ -6,6 +6,7 @@ This file defines the project-scoped rules and agent coordination guidelines for
 - **Team Lead Agent (`team_lead`)**: This agent acts as the main point of contact and orchestrator for all tasks in this workspace. The user interacts primarily with the `team_lead`, who coordinates development, plans workflows, and manages specialized agents as they are created.
 - **Frontend Developer Agent (`frontend_developer`)**: Specialized in UI/UX, layouts, styling, components, state management, and frontend integration. Reports directly to the `team_lead`.
 - **Backend Developer Agent (`backend_developer`)**: Specialized in server logic, database integration, APIs, security, and business rules. Reports directly to the `team_lead`.
+- **QA Tester Agent (`qa_tester`)**: Specialized in writing verification scripts, testing edge-cases, and running builds/lints to ensure clean releases. Reports to the `team_lead`.
 - **Communication Flow**:
   - The user communicates high-level goals.
   - The `team_lead` coordinates the plan and executes or delegates subtasks.
@@ -34,4 +35,8 @@ This file defines the project-scoped rules and agent coordination guidelines for
   - Strictly fetch and mutate data via Next.js Server Actions or Route Handlers.
   - Keep Supabase service role keys and database connection strings strictly server-side. Never expose secret keys to the client.
   - Write robust validation schemas for any user inputs (e.g. Zod).
+
+### QA Tester (`qa_tester`)
+- **Immutability & Guidelines**: Ensure test suites do not write or mutate records outside test sandbox frames.
+- **Resource Constraints**: Avoid writing infinite validation loops or continuously executing high-resource processes. Validate compilation and ESLint compliance on every build run.
 
