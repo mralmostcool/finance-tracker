@@ -1,0 +1,76 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top right, var(--bg-secondary), var(--bg-primary));
+}
+
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+  backdrop-filter: blur(var(--blur-radius));
+  -webkit-backdrop-filter: blur(var(--blur-radius));
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(102, 252, 241, 0.15);
+  border-color: rgba(102, 252, 241, 0.3);
+}
+
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: rgba(102, 252, 241, 0.1);
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(102, 252, 241, 0.25);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  color: #0b0c10;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color var(--transition-smooth), transform var(--transition-smooth);
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.02);
+}
