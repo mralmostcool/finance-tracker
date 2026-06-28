@@ -16,56 +16,24 @@ export default async function DashboardPage() {
 
   const userInitial = user.email ? user.email.charAt(0).toUpperCase() : "U";
 
-  // Mock Data matching the upload image design
-  const stats = [
+  // Dynamically driven sidebar features
+  const features = [
     {
-      title: "Total Balance",
-      value: "$58,154.07",
-      change: "+2.5%",
-      isPositive: true,
+      name: "Dashboard",
+      href: "/dashboard",
+      active: true,
       icon: (
-        <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <rect x="2" y="5" width="20" height="14" rx="2" />
-          <line x1="2" y1="10" x2="22" y2="10" />
-        </svg>
-      ),
-    },
-    {
-      title: "Monthly Expense",
-      value: "$32,453.53",
-      change: "+1.5%",
-      isPositive: true,
-      icon: (
-        <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-      ),
-    },
-    {
-      title: "Monthly Income",
-      value: "$62,623.02",
-      change: "+3.5%",
-      isPositive: true,
-      icon: (
-        <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M23 6l-9.5 9.5-5-5L1 18" />
-          <path d="M17 6h6v6" />
-        </svg>
-      ),
-    },
-    {
-      title: "Monthly Savings",
-      value: "$62,766.43",
-      change: "-1.5%",
-      isPositive: false,
-      icon: (
-        <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M19 12H5M12 19l-7-7 7-7" />
+        <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="7" height="9" rx="1" />
+          <rect x="14" y="3" width="7" height="5" rx="1" />
+          <rect x="14" y="12" width="7" height="9" rx="1" />
+          <rect x="3" y="16" width="7" height="5" rx="1" />
         </svg>
       ),
     },
   ];
 
+  // Mock Data for reference design rows
   const cashFlowData = [
     { month: "Jan", income: 45, expense: 30 },
     { month: "Feb", income: 85, expense: 50 },
@@ -102,89 +70,20 @@ export default async function DashboardPage() {
       {/* Sidebar Navigation */}
       <aside className={styles.sidebar}>
         <div>
-          <div className={styles.sectionLabel}>Main Menu</div>
+          <div className={styles.sectionLabel}>Features</div>
           <ul className={styles.menu}>
-            <li>
-              <a href="/dashboard" className={`${styles.menuItem} ${styles.menuItemActive}`}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="9" rx="1" />
-                  <rect x="14" y="3" width="7" height="5" rx="1" />
-                  <rect x="14" y="12" width="7" height="9" rx="1" />
-                  <rect x="3" y="16" width="7" height="5" rx="1" />
-                </svg>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="4" width="18" height="16" rx="2" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-                My Wallet
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 3L21 7L17 11M7 21L3 17L7 13" />
-                  <path d="M3 17H21M21 7H3" />
-                </svg>
-                Transfer
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                Transactions
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <line x1="12" y1="4" x2="12" y2="20" />
-                </svg>
-                Payments
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                </svg>
-                Savings
-              </a>
-            </li>
+            {features.map((feature, idx) => (
+              <li key={idx}>
+                <a
+                  href={feature.href}
+                  className={`${styles.menuItem} ${feature.active ? styles.menuItemActive : ""}`}
+                >
+                  {feature.icon}
+                  {feature.name}
+                </a>
+              </li>
+            ))}
           </ul>
-
-          <div className={styles.sectionLabel}>Others</div>
-          <ul className={styles.menu}>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="3" />
-                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                </svg>
-                Settings
-              </a>
-            </li>
-            <li>
-              <a href="#" className={styles.menuItem}>
-                <svg className={styles.menuIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                </svg>
-                Support
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className={styles.upgradeCard}>
-          <div className={styles.upgradeTitle}>Upgrade to Pro</div>
-          <p className={styles.upgradeText}>Unlock advanced financial search, reports & charts.</p>
         </div>
 
         <form action={logout} className={styles.logoutForm}>
@@ -216,25 +115,7 @@ export default async function DashboardPage() {
           </div>
         </header>
 
-        {/* Stats Grid */}
-        <section className={styles.statsGrid}>
-          {stats.map((stat, idx) => (
-            <div className={stat.title === "Total Balance" ? `${styles.statCard} ${styles.statCardBalance}` : styles.statCard} key={idx}>
-              <div className={styles.statHeader}>
-                {stat.icon}
-                <span>{stat.title}</span>
-              </div>
-              <div className={styles.statValueWrapper}>
-                <span className={styles.statValue}>{stat.value}</span>
-                <span className={`${styles.badge} ${stat.isPositive ? styles.badgeSuccess : styles.badgeDanger}`}>
-                  {stat.change}
-                </span>
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* Middle Section: Cash Flow & Donut */}
+        {/* Reference Layout: Row 1 (Charts) */}
         <section className={styles.middleGrid}>
           {/* Cash Flow */}
           <div className={styles.card}>
@@ -286,16 +167,10 @@ export default async function DashboardPage() {
             <div className={styles.donutContainer}>
               <svg width="160" height="160" viewBox="0 0 36 36">
                 <circle cx="18" cy="18" r="15.915" fill="none" stroke="#f3f4f6" strokeWidth="3" />
-                
-                {/* 44% Daily Needs */}
                 <circle cx="18" cy="18" r="15.915" fill="none" stroke="#635bff" strokeWidth="3.2" 
                         strokeDasharray="44 56" strokeDashoffset="25" />
-                
-                {/* 20% Savings */}
                 <circle cx="18" cy="18" r="15.915" fill="none" stroke="#a855f7" strokeWidth="3.2" 
                         strokeDasharray="20 80" strokeDashoffset="81" />
-                
-                {/* 36% Shopping (Mocked for remaining gap, visually represents the rest) */}
                 <circle cx="18" cy="18" r="15.915" fill="none" stroke="#60a5fa" strokeWidth="3.2" 
                         strokeDasharray="36 64" strokeDashoffset="61" />
               </svg>
@@ -319,7 +194,7 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        {/* Bottom Grid: Upcoming & History */}
+        {/* Reference Layout: Row 2 (Lists & Tables) */}
         <section className={styles.bottomGrid}>
           {/* Upcoming Transaction */}
           <div className={styles.card}>
