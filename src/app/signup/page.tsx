@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { signup } from "../login/actions";
-import GoogleButton from "../login/GoogleButton";
-import styles from "../login/auth.module.css";
+import { signup } from "../actions";
+import GoogleButton from "../GoogleButton";
+import styles from "../auth.module.css";
 
 interface SearchParams {
   error?: string;
@@ -64,7 +64,7 @@ export default async function SignupPage({
 
         <p className={styles.footerText}>
           Already have an account?{" "}
-          <Link href="/login" className={styles.link} id="login-link">
+          <Link href="/" className={styles.link} id="login-link">
             Log In
           </Link>
         </p>

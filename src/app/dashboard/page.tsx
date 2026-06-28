@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { logout } from "../login/actions";
+import { logout } from "../actions";
 import styles from "./dashboard.module.css";
 
 export default async function DashboardPage() {
@@ -10,7 +10,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login");
+    redirect("/");
   }
 
   const userInitial = user.email ? user.email.charAt(0).toUpperCase() : "U";

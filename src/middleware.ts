@@ -33,15 +33,15 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname
 
-  // Protected routes: redirect to login if not logged in
+  // Protected routes: redirect to root if not logged in
   if (path.startsWith('/dashboard')) {
     if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      return NextResponse.redirect(new URL('/', request.url))
     }
   }
 
   // Auth pages: redirect to dashboard if already logged in
-  if (path.startsWith('/login') || path.startsWith('/signup')) {
+  if (path === '/' || path.startsWith('/login') || path.startsWith('/signup')) {
     if (user) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
