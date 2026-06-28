@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { deleteTransaction } from "../../actions/finance";
 import type { Category, Transaction } from "@/types/finance";
 import AddTransactionsModal from "./AddTransactionsModal";
+import CustomSelect from "../../components/CustomSelect";
 import styles from "./checkbook.module.css";
 
 interface CheckbookLedgerProps {
@@ -20,7 +21,6 @@ export default function CheckbookLedger({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Filter States
-  const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "debit" | "credit">("all");
   const [categoryFilter, setCategoryFilter] = useState("");
 
@@ -54,15 +54,12 @@ export default function CheckbookLedger({
   // 2. Filtered Transactions
   const filteredTransactions = useMemo(() => {
     return transactionsWithBalance.filter((t) => {
-      const matchesSearch = t.description
-        ? t.description.toLowerCase().includes(search.toLowerCase())
-        : search === "";
       const matchesType = typeFilter === "all" ? true : t.type === typeFilter;
       const matchesCategory = categoryFilter === "" ? true : t.category_id === categoryFilter;
 
-      return matchesSearch && matchesType && matchesCategory;
+      return matchesType && matchesCategory;
     });
-  }, [transactionsWithBalance, search, typeFilter, categoryFilter]);
+  }, [transactionsWithBalance, typeFilter, categoryFilter]);
 
   // 3. Overall ledger stats (calculated from all transactions)
   const stats = useMemo(() => {
@@ -130,36 +127,27 @@ export default function CheckbookLedger({
       {/* Filters Toolbar */}
       <section className={styles.toolbar}>
         <div className={styles.filters}>
-          <input
-            type="text"
-            placeholder="Search description..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className={styles.inputSearch}
+          <CustomSelect
+            value={typeFilter}
+            onChange={(val) => setTypeFilter(val as "all" | "debit" | "credit")}
+            options={[
+              { value: "all", label: "All Types" },
+              { value: "credit", label: "Credits (+)" },
+              { value: "debit", label: "Debits (-)" },
+            ]}
           />
 
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value as "all" | "debit" | "credit")}
-            className={styles.select}
-          >
-            <option value="all">All Types</option>
-            <option value="credit">Credits (+)</option>
-            <option value="debit">Debits (-)</option>
-          </select>
-
-          <select
+          <CustomSelect
             value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            className={styles.select}
-          >
-            <option value="">All Categories</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                [{c.type.toUpperCase()}] {c.name}
-              </option>
-            ))}
-          </select>
+            onChange={(val) => setCategoryFilter(val)}
+            options={[
+              { value: "", label: "All Categories" },
+              ...categories.map((c) => ({
+                value: c.id,
+                label: `[${c.type.toUpperCase()}] ${c.name}`,
+              })),
+            ]}
+          />
         </div>
 
         <button onClick={() => setIsModalOpen(true)} className={styles.addButton} id="add-transactions-btn">

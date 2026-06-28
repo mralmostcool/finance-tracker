@@ -95,7 +95,7 @@
   font-weight: 600;
   border: none;
   padding: 0.6rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 0.9rem;
   cursor: pointer;
   display: inline-flex;
@@ -318,7 +318,7 @@
   border: 1px dashed #635bff;
   color: #635bff;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
@@ -345,7 +345,7 @@
   color: #4b5563;
   font-weight: 600;
   padding: 0.5rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -361,7 +361,7 @@
   font-weight: 600;
   border: none;
   padding: 0.5rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 9999px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s;
