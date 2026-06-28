@@ -189,3 +189,53 @@ export async function deleteTransaction(id: string): Promise<{ success: boolean;
     return { success: false, error: getErrorMessage(err) };
   }
 }
+
+/**
+ * Batch insert multiple transactions for the authenticated user.
+ */
+export async function addTransactions(inputs: TransactionInput[]): Promise<{ success: boolean; data?: Transaction[]; error?: string }> {
+  try {
+    if (inputs.length === 0) {
+      return { success: false, error: 'No transactions provided.' };
+    }
+
+    // Validate all inputs
+    const validatedInputs = [];
+    for (const input of inputs) {
+      const parsed = TransactionInputSchema.safeParse(input);
+      if (!parsed.success) {
+        return { success: false, error: `Invalid input: ${parsed.error.issues[0].message}` };
+      }
+      validatedInputs.push(parsed.data);
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      return { success: false, error: 'Unauthorized' };
+    }
+
+    // Prepare inputs with user_id
+    const payload = validatedInputs.map(item => ({
+      user_id: user.id,
+      amount: item.amount,
+      type: item.type,
+      category_id: item.category_id || null,
+      description: item.description?.trim() || null,
+      date: item.date,
+    }));
+
+    const { data, error } = await supabase
+      .from('transactions')
+      .insert(payload)
+      .select('*, category:categories(*)');
+
+    if (error) throw error;
+
+    revalidatePath('/dashboard');
+    return { success: true, data: data as Transaction[] };
+  } catch (err) {
+    return { success: false, error: getErrorMessage(err) };
+  }
+}
