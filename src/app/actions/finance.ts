@@ -7,6 +7,10 @@ import type { Category, Transaction, CategoryInput, TransactionInput } from '@/t
 
 function getErrorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
+  if (err && typeof err === 'object') {
+    if ('message' in err) return String((err as { message: unknown }).message);
+    if ('error_description' in err) return String((err as { error_description: unknown }).error_description);
+  }
   return String(err);
 }
 
