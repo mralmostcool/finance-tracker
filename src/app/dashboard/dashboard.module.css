@@ -1,0 +1,186 @@
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--bg-primary);
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 2.5rem;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+.menuItem:hover, .menuItemActive {
+  background-color: rgba(102, 252, 241, 0.05);
+  color: var(--accent-color);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.welcomeSection h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.welcomeSection p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-purple));
+  color: #0b0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.logoutButton {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+.logoutButton:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.statCard {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px 0 var(--glass-shadow);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statTitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px var(--glass-shadow);
+}
+
+.emptyStateIcon {
+  font-size: 3rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.emptyState h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  max-width: 400px;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.ctaButton {
+  background-color: var(--accent-color);
+  color: #0b0c10;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-smooth);
+}
+
+.ctaButton:hover {
+  background-color: var(--accent-hover);
+}
