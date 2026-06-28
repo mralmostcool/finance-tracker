@@ -216,12 +216,14 @@ export default function CheckbookLedger({
       </section>
 
       {/* Interactive Batch Insert Modal */}
-      <AddTransactionsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        categories={categories}
-        onSuccess={handleSuccess}
-      />
+      {isModalOpen && (
+        <AddTransactionsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          categories={categories}
+          onSuccess={handleSuccess}
+        />
+      )}
     </div>
   );
 }

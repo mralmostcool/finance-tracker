@@ -76,7 +76,7 @@ export async function addCategory(input: CategoryInput): Promise<{ success: bool
       throw error;
     }
 
-    revalidatePath('/dashboard');
+    revalidatePath('/dashboard', 'layout');
     return { success: true, data: data as Category };
   } catch (err) {
     return { success: false, error: getErrorMessage(err) };
@@ -156,7 +156,7 @@ export async function addTransaction(input: TransactionInput): Promise<{ success
 
     if (error) throw error;
 
-    revalidatePath('/dashboard');
+    revalidatePath('/dashboard', 'layout');
     return { success: true, data: data as Transaction };
   } catch (err) {
     return { success: false, error: getErrorMessage(err) };
@@ -183,7 +183,7 @@ export async function deleteTransaction(id: string): Promise<{ success: boolean;
 
     if (error) throw error;
 
-    revalidatePath('/dashboard');
+    revalidatePath('/dashboard', 'layout');
     return { success: true };
   } catch (err) {
     return { success: false, error: getErrorMessage(err) };
@@ -233,7 +233,7 @@ export async function addTransactions(inputs: TransactionInput[]): Promise<{ suc
 
     if (error) throw error;
 
-    revalidatePath('/dashboard');
+    revalidatePath('/dashboard', 'layout');
     return { success: true, data: data as Transaction[] };
   } catch (err) {
     return { success: false, error: getErrorMessage(err) };

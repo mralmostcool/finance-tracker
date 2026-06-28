@@ -37,7 +37,6 @@ export default function AddTransactionsModal({
   const [rows, setRows] = useState<RowState[]>([createEmptyRow()]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   if (!isOpen) return null;
 
   const handleAddRow = () => {
