@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { logout } from "../actions";
 import styles from "./dashboard.module.css";
@@ -45,22 +46,22 @@ export default async function DashboardLayout({
           <ul className={styles.menu}>
             {features.map((feature, idx) => (
               <li key={idx}>
-                <a
+                <Link
                   href={feature.href}
                   className={`${styles.menuItem} ${feature.active ? styles.menuItemActive : ""}`}
                 >
                   {feature.icon}
                   {feature.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div className={styles.sidebarBottom}>
-          <a href="/dashboard/settings" className={styles.userButton} id="settings-btn" style={{ justifyContent: "center" }}>
+          <Link href="/dashboard/settings" className={styles.userButton} id="settings-btn" style={{ justifyContent: "center" }}>
             <span className={styles.userNameText}>{displayName}</span>
-          </a>
+          </Link>
 
           <form action={logout} className={styles.logoutForm}>
             <button className={styles.logoutButton} id="logout-btn">
